@@ -10,12 +10,13 @@ return new class extends Migration
     {
         Schema::create('karyawan', function (Blueprint $table) {
             $table->id('id_karyawan');
-            $table->foreignId('id_dept')
-                ->constrained('departemen', 'id_dept')
+            $table->unsignedBigInteger('id_dept');
+            $table->foreign('id_dept')
+                ->references('id_dept')
+                ->on('departemen')
                 ->restrictOnDelete();
-            $table->string('nip', 20)
-                ->nullable()
-                ->unique();
+
+            $table->string('nip', 20)->nullable()->unique();
             $table->string('nama_karyawan', 100);
             $table->string('jabatan', 100);
             $table->string('status_karyawan', 20);
@@ -24,6 +25,7 @@ return new class extends Migration
             $table->char('jenis_kelamin', 1)->nullable();
         });
     }
+
     public function down(): void
     {
         Schema::dropIfExists('karyawan');
