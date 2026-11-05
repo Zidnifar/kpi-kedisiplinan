@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('karyawan', function (Blueprint $table) {
             $table->id('id_karyawan');
             $table->foreignId('id_dept')
-                ->constrained('departemen')
+                ->constrained('departemen', 'id_dept')
                 ->restrictOnDelete();
             $table->string('nip', 20)
                 ->nullable()
